@@ -377,7 +377,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
                 <div class="info-card">
                     <div class="card-label">Student ID</div>
-                    <div class="card-value"><?= htmlspecialchars($student_id ?? 'MCC2024-00188'); ?></div>
+                    <div class="card-value"><?= htmlspecialchars($student_id ?? 'MCC2024-00155'); ?></div>
                 </div>
 
                 <div class="info-card">

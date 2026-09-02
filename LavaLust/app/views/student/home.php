@@ -585,7 +585,7 @@
                 <div class="info-row-container">
                     <div class="info-row">
                         <strong>Student ID</strong>
-                        <span><?= htmlspecialchars($student_id ?? 'MCC2024-00188'); ?></span>
+                        <span><?= htmlspecialchars($student_id ?? 'MCC2024-00155'); ?></span>
                     </div>
 
                     <div class="info-row">

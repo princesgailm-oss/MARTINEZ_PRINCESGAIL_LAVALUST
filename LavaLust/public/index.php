@@ -1,5 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 define('PREVENT_DIRECT_ACCESS', TRUE);
+
 /**
  * ------------------------------------------------------------------
  * LavaLust - an opensource lightweight PHP MVC Framework
@@ -45,7 +50,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * 
  * NO TRAILING SLASH!
  */
-	$system_path 			= 'scheme';
+    $system_path            = 'scheme';
 
 /*
  *---------------------------------------------------------------
@@ -57,7 +62,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  *
  * NO TRAILING SLASH!
  */
-	$application_folder 	= 'app';
+    $application_folder     = 'app';
 
 /*
  *---------------------------------------------------------------
@@ -66,7 +71,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * This let you set up your public folder where css, js and other public,
  * files will be visible
  */
-	$public_folder			= 'public';
+    $public_folder          = 'public';
 
 /*
  * ------------------------------------------------------
@@ -84,4 +89,3 @@ define('PUBLIC_DIR', $public_folder);
  * ------------------------------------------------------
  */
 require_once SYSTEM_DIR . 'kernel/LavaLust.php';
-?>

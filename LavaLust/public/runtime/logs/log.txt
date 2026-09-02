@@ -1,0 +1,42 @@
+Date: 02/09/2026 12:31:10
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+
+Date: 02/09/2026 12:31:10
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+
+Date: 02/09/2026 12:31:13
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+
+Date: 02/09/2026 12:31:14
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+
+Date: 02/09/2026 12:31:14
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+
+Date: 02/09/2026 12:31:20
+Exception Class: E_WARNING
+Error Message: Undefined array key "first_name"
+Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
+Line Number: 49
+------------------------------------------------------------------
+

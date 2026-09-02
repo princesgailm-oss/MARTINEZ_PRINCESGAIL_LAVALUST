@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * ------------------------------------------------------------------
@@ -99,7 +103,7 @@ $config['proxy_enabled']           = FALSE;
 | variable to blank.
 |
 */
-$config['index_page']               = '';
+$config['index_page']               = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +118,7 @@ $config['index_page']               = '';
 |   3 = All
 |
 */
-$config['log_threshold']            = 0;
+$config['log_threshold']            = 3;
 $config['log_dir']                  = 'runtime/logs/';
 
 /*
