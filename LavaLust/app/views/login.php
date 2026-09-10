@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login</title>
+    <title>Login | Admin Portal</title>
 
     <style>
         * {
@@ -14,8 +13,8 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f5ef;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f5132 0%, #38bdf8 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -24,56 +23,57 @@
 
         .login-container {
             width: 100%;
-            max-width: 430px;
-            padding: 25px;
+            max-width: 420px;
+            padding: 20px;
         }
 
         .login-card {
             background: #ffffff;
-            border: 1px solid #e2e1da;
-            border-radius: 16px;
-            padding: 45px 40px 38px;
-            box-shadow: 0 8px 30px rgba(7, 92, 54, 0.08);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+            border: 1px solid #e0f2fe;
         }
 
         .form-title {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
         .form-title h2 {
             margin: 0;
-            font-size: 27px;
-            color: #075c36;
+            font-size: 28px;
+            color: #0f5132;
             font-weight: 700;
         }
 
         .form-title p {
-            margin: 9px 0 0;
+            margin: 8px 0 0;
             font-size: 14px;
-            color: #777;
+            color: #0284c7;
         }
 
         .error {
-            background: #fff0f0;
-            border: 1px solid #e6a6a6;
-            color: #a62626;
-            padding: 11px 13px;
-            border-radius: 7px;
+            background: #f8d7da;
+            border: 1px solid #f5c2c7;
+            color: #842029;
+            padding: 12px 15px;
+            border-radius: 10px;
             font-size: 13px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             font-size: 14px;
-            font-weight: bold;
-            color: #174d36;
+            font-weight: 600;
+            color: #1e293b;
         }
 
         .input-wrapper {
@@ -85,60 +85,68 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #075c36;
             font-size: 16px;
         }
 
         .form-control {
             width: 100%;
-            height: 48px;
-            border: 1px solid #d9ddd8;
-            border-radius: 8px;
-            background: #fff;
-            padding: 0 15px 0 43px;
+            height: 50px;
+            border: 1.5px solid #bae6fd;
+            border-radius: 10px;
+            background: #f0f9ff;
+            padding: 0 15px 0 45px;
             font-size: 14px;
-            color: #333;
+            color: #0f172a;
             outline: none;
-            transition: 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .form-control::placeholder {
-            color: #999;
+            color: #94a3b8;
         }
 
         .form-control:focus {
-            border-color: #075c36;
-            box-shadow: 0 0 0 3px rgba(7, 92, 54, 0.08);
+            border-color: #38bdf8;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
         }
 
         .login-btn {
             width: 100%;
-            height: 48px;
+            height: 50px;
             border: none;
-            border-radius: 8px;
-            background: #075c36;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0f5132 0%, #0284c7 100%);
             color: white;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 5px;
-            transition: 0.2s ease;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
         }
 
         .login-btn:hover {
-            background: #064a2d;
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(2, 132, 199, 0.4);
         }
 
         .login-btn span {
-            margin-left: 5px;
-            font-size: 17px;
+            margin-left: 6px;
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .login-btn:hover span {
+            transform: translateX(4px);
         }
 
         .divider {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin: 24px 0 0;
+            margin: 25px 0 0;
         }
 
         .divider::before,
@@ -146,30 +154,26 @@
             content: "";
             flex: 1;
             height: 1px;
-            background: #d9ddd8;
+            background: #e2e8f0;
         }
 
         .divider-text {
-            color: #37604e;
+            color: #0284c7;
             font-size: 12px;
             white-space: nowrap;
+            font-weight: 500;
         }
 
         .footer {
             text-align: center;
-            margin-top: 23px;
+            margin-top: 20px;
             font-size: 12px;
-            color: #999;
+            color: #94a3b8;
         }
 
         @media (max-width: 480px) {
-
-            .login-container {
-                padding: 15px;
-            }
-
             .login-card {
-                padding: 35px 25px 30px;
+                padding: 30px 20px;
             }
 
             .form-title h2 {
@@ -187,38 +191,25 @@
 
         <!-- LOGIN TITLE -->
         <div class="form-title">
-
             <h2>Welcome Back!</h2>
-
             <p>Sign in to your account</p>
-
         </div>
-
 
         <!-- ERROR MESSAGE -->
         <?php if (isset($error)): ?>
-
             <div class="error">
                 <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
             </div>
-
         <?php endif; ?>
-
 
         <!-- LOGIN FORM -->
         <form method="POST" action="<?= site_url('login'); ?>">
 
             <!-- USERNAME -->
             <div class="form-group">
-
-                <label for="username">
-                    Username
-                </label>
-
+                <label for="username">Username</label>
                 <div class="input-wrapper">
-
                     <span class="input-icon">👤</span>
-
                     <input
                         type="text"
                         id="username"
@@ -227,23 +218,14 @@
                         placeholder="Username"
                         required
                     >
-
                 </div>
-
             </div>
-
 
             <!-- PASSWORD -->
             <div class="form-group">
-
-                <label for="password">
-                    Password
-                </label>
-
+                <label for="password">Password</label>
                 <div class="input-wrapper">
-
                     <span class="input-icon">🔒</span>
-
                     <input
                         type="password"
                         id="password"
@@ -252,11 +234,8 @@
                         placeholder="Password"
                         required
                     >
-
                 </div>
-
             </div>
-
 
             <!-- LOGIN BUTTON -->
             <button type="submit" class="login-btn">
@@ -265,16 +244,12 @@
 
         </form>
 
-
         <!-- DIVIDER -->
         <div class="divider">
-
             <div class="divider-text">
                 Manage Your Products, Faster
             </div>
-
         </div>
-
 
         <!-- FOOTER -->
         <div class="footer">
