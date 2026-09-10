@@ -1,3 +1,4 @@
+
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
@@ -10,6 +11,12 @@ class AuthController extends Controller
         $this->call->library('session');
         $this->call->helper('url');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGIN
+    |--------------------------------------------------------------------------
+    */
 
     public function login()
     {
@@ -40,11 +47,20 @@ class AuthController extends Controller
         $this->call->view('login');
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGOUT
+    |--------------------------------------------------------------------------
+    */
+
     public function logout()
     {
         $this->session->sess_destroy();
 
         redirect(site_url('login'));
+        return;
     }
 }
 ?>
+
