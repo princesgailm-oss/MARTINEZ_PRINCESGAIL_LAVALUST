@@ -1,33 +1,126 @@
-public function store()
+
+<?php
+defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
+class ProductController extends Controller
 {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    public function __construct()
+    {
+        parent::__construct();
 
-    echo "<pre>";
-
-    if ($this->io->method() !== 'post') {
-        echo "ERROR: Request is not POST.";
-        exit;
+        $this->call->model('ProductModel');
+        $this->call->library('session');
+        $this->call->helper('url');
     }
 
-    $data = array(
-        'name'        => $this->io->post('product_name'),
-        'description' => $this->io->post('description'),
-        'price'       => $this->io->post('price'),
-        'quantity'    => $this->io->post('quantity')
-    );
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT LIST
+    |--------------------------------------------------------------------------
+    */
 
-    echo "DATA BEING SAVED:\n";
-    print_r($data);
+    public function index()
+    {
+        $data['products'] = $this->ProductModel->all();
 
-    echo "\n\nTrying to save...\n";
+        $this->call->view('products/index', $data);
+    }
 
-    $result = $this->ProductModel->create($data);
 
-    echo "\nDatabase result:\n";
-    var_dump($result);
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE PRODUCT
+    |--------------------------------------------------------------------------
+    */
 
-    echo "\n\nIf you see this message, database insert finished.";
-    exit;
+    public function create()
+    {
+        $this->call->view('products/create');
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | STORE PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    public function store()
+    {
+        if ($this->io->method() !== 'post') {
+            redirect(site_url('products'));
+            return;
+        }
+
+        $data = array(
+            'name'        => $this->io->post('product_name'),
+            'description' => $this->io->post('description'),
+            'price'       => $this->io->post('price'),
+            'quantity'    => $this->io->post('quantity')
+        );
+
+        $this->ProductModel->create($data);
+
+        redirect(site_url('products'));
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    public function edit($id)
+    {
+        $data['product'] = $this->ProductModel->find($id);
+
+        if (!$data['product']) {
+            redirect(site_url('products'));
+            return;
+        }
+
+        $this->call->view('products/edit', $data);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    public function update($id)
+    {
+        if ($this->io->method() !== 'post') {
+            redirect(site_url('products'));
+            return;
+        }
+
+        $data = array(
+            'name'        => $this->io->post('product_name'),
+            'description' => $this->io->post('description'),
+            'price'       => $this->io->post('price'),
+            'quantity'    => $this->io->post('quantity')
+        );
+
+        $this->ProductModel->update($id, $data);
+
+        redirect(site_url('products'));
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    public function delete($id)
+    {
+        $this->ProductModel->delete($id);
+
+        redirect(site_url('products'));
+    }
 }
+

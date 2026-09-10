@@ -1,3 +1,4 @@
+
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
@@ -27,20 +28,21 @@ $router->get('/logout', 'AuthController::logout');
 |--------------------------------------------------------------------------
 */
 
-/* Product list */
+/* Product List */
 $router->get('/products', 'ProductController::index');
 
-/* Create product */
+/* Add Product Page */
 $router->get('/products/create', 'ProductController::create');
 
-/* Save new product */
+/* Save Product */
 $router->post('/products/store', 'ProductController::store');
 
-/* Edit product */
+/* Edit Product */
 $router->get('/products/edit/(:num)', 'ProductController::edit/$1');
 
-/* Update product */
+/* Update Product */
 $router->post('/products/update/(:num)', 'ProductController::update/$1');
 
-/* Delete product */
+/* Delete Product */
 $router->get('/products/delete/(:num)', 'ProductController::delete/$1');
+
