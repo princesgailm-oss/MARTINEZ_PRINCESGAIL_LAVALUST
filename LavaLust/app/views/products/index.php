@@ -4,129 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f3e8ff;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            padding: 3rem 1rem;
+        * {
+            box-sizing: border-box;
         }
-        .main-container {
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e0f2fe; /* Light Sky Blue Background */
+            color: #0f172a;
+            padding: 40px 20px;
+        }
+
+        .container {
             max-width: 1100px;
             margin: 0 auto;
         }
-        .header-title {
-            color: #6b21a8;
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header-bar h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #0369a1; /* Darker Blue */
             font-weight: 700;
-            font-size: 2.25rem;
         }
-        .btn-add {
-            background-color: #7e22ce;
-            border: none;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
+
+        .action-btns {
+            display: flex;
+            gap: 12px;
         }
-        .btn-add:hover {
-            background-color: #6b21a8;
-            color: #ffffff;
-        }
-        .btn-logout {
-            background-color: #dc2626;
-            border: none;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
-        }
-        .btn-logout:hover {
-            background-color: #b91c1c;
-            color: #ffffff;
-        }
-        .card-table-wrapper {
-            background: #ffffff;
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
             border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
         }
-        .custom-table {
+
+        .btn-add {
+            background-color: #0284c7; /* Sky Blue Accent */
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+
+        .btn-add:hover {
+            background-color: #0369a1;
+            transform: translateY(-1px);
+        }
+
+        .btn-logout {
+            background-color: #ef4444; /* Red Logout */
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-logout:hover {
+            background-color: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.1);
+            border: 1px solid #bae6fd;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 0;
+            text-align: left;
         }
-        .custom-table thead th {
-            background-color: #7e22ce;
+
+        thead tr {
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); /* Blue to Sky Blue Header */
             color: #ffffff;
-            padding: 0.85rem 1rem;
+        }
+
+        th {
+            padding: 14px 16px;
+            font-size: 14px;
             font-weight: 600;
-            border: none;
         }
-        .custom-table thead th:first-child {
-            border-top-left-radius: 6px;
-            border-bottom-left-radius: 6px;
+
+        th:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
         }
-        .custom-table thead th:last-child {
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
+
+        th:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
-        .custom-table td {
-            padding: 1.25rem 1rem;
-            color: #6b7280;
-            border-bottom: 1px solid #e5e7eb;
+
+        td {
+            padding: 16px;
+            font-size: 14px;
+            color: #334155;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f9ff;
+        }
+
+        .btn-edit {
+            background-color: #eab308; /* Yellow Edit */
+            color: #ffffff;
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+            margin-right: 4px;
+        }
+
+        .btn-edit:hover {
+            background-color: #ca8a04;
+        }
+
+        .btn-delete {
+            background-color: #ef4444; /* Red Delete */
+            color: #ffffff;
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
         }
     </style>
 </head>
 <body>
-    <div class="container main-container">
-        <!-- Header Controls -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="header-title mb-0">Product Management</h1>
-            <div class="d-flex gap-2">
-                <a href="<?= site_url('products/create'); ?>" class="btn btn-add">+ Add Product</a>
-                <a href="<?= site_url('logout'); ?>" class="btn btn-logout">Logout</a>
-            </div>
-        </div>
 
-        <!-- Table Container -->
-        <div class="card-table-wrapper">
-            <table class="table custom-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Created At</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if(!empty($products)): ?>
-                        <?php foreach($products as $p): ?>
-                        <tr>
-                            <td><?= $p['id']; ?></td>
-                            <td><?= $p['product_name']; ?></td>
-                            <td><?= $p['description']; ?></td>
-                            <td><?= $p['price']; ?></td>
-                            <td><?= $p['quantity']; ?></td>
-                            <td><?= isset($p['created_at']) ? $p['created_at'] : '—'; ?></td>
-                            <td>
-                                <a href="<?= site_url('products/edit/'.$p['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="<?= site_url('products/delete/'.$p['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="7" class="text-center text-muted py-5">No products found.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+<div class="container">
+
+    <div class="header-bar">
+        <h1>Product Management</h1>
+        <div class="action-btns">
+            <a href="<?= site_url('products/create'); ?>" class="btn btn-add">+ Add Product</a>
+            <a href="<?= site_url('logout'); ?>" class="btn btn-logout">Logout</a>
         </div>
     </div>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($products)): ?>
+                    <?php foreach ($products as $product): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($product['id']); ?></td>
+                            <td><?= htmlspecialchars($product['name']); ?></td>
+                            <td><?= htmlspecialchars($product['description']); ?></td>
+                            <td><?= number_format($product['price'], 2); ?></td>
+                            <td><?= htmlspecialchars($product['quantity']); ?></td>
+                            <td><?= htmlspecialchars($product['created_at']); ?></td>
+                            <td>
+                                <a href="<?= site_url('products/edit/' . $product['id']); ?>" class="btn btn-edit">Edit</a>
+                                <a href="<?= site_url('products/delete/' . $product['id']); ?>" class="btn btn-delete" onclick="return confirm('Sigurado ka bang gusto mong burahin ito?');">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #64748b;">No products found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
 </body>
 </html>
