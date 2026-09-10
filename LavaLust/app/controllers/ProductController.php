@@ -1,3 +1,4 @@
+
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
@@ -47,19 +48,20 @@ class ProductController extends Controller
     public function store()
     {
         if ($this->io->method() !== 'post') {
-            redirect('products');
+            redirect(site_url('products'));
             return;
         }
 
         $data = array(
-            'name'        => $this->io->post('name'),
+            'name'        => $this->io->post('product_name'),
             'description' => $this->io->post('description'),
-            'price'       => $this->io->post('price')
+            'price'       => $this->io->post('price'),
+            'quantity'    => $this->io->post('quantity')
         );
 
         $this->ProductModel->create($data);
 
-        redirect('products');
+        redirect(site_url('products'));
     }
 
 
@@ -74,7 +76,7 @@ class ProductController extends Controller
         $data['product'] = $this->ProductModel->find($id);
 
         if (!$data['product']) {
-            redirect('products');
+            redirect(site_url('products'));
             return;
         }
 
@@ -91,19 +93,20 @@ class ProductController extends Controller
     public function update($id)
     {
         if ($this->io->method() !== 'post') {
-            redirect('products');
+            redirect(site_url('products'));
             return;
         }
 
         $data = array(
-            'name'        => $this->io->post('name'),
+            'name'        => $this->io->post('product_name'),
             'description' => $this->io->post('description'),
-            'price'       => $this->io->post('price')
+            'price'       => $this->io->post('price'),
+            'quantity'    => $this->io->post('quantity')
         );
 
         $this->ProductModel->update($id, $data);
 
-        redirect('products');
+        redirect(site_url('products'));
     }
 
 
@@ -117,6 +120,6 @@ class ProductController extends Controller
     {
         $this->ProductModel->delete($id);
 
-        redirect('products');
+        redirect(site_url('products'));
     }
 }
