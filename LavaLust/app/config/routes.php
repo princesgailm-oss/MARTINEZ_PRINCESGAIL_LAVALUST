@@ -1,20 +1,44 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-/* Home */
+/*
+|--------------------------------------------------------------------------
+| HOME
+|--------------------------------------------------------------------------
+*/
 $router->get('/', 'Welcome::index');
 
-/* Auth */
+
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATION
+|--------------------------------------------------------------------------
+*/
 $router->get('/login', 'AuthController::login');
 $router->post('/login', 'AuthController::login');
 $router->get('/logout', 'AuthController::logout');
 
-/* Product CRUD */
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCT CRUD
+|--------------------------------------------------------------------------
+*/
+
+// Product list
 $router->get('/products', 'ProductController::index');
+
+// Show create form
 $router->get('/products/create', 'ProductController::create');
+
+// Save new product
 $router->post('/products/store', 'ProductController::store');
 
-/* Edit, Update, Delete Routes */
-$router->get('/products/edit/(:num)', 'ProductController::edit');
-$router->post('/products/update/(:num)', 'ProductController::update');
-$router->get('/products/delete/(:num)', 'ProductController::delete');
+// Show edit form
+$router->get('/products/edit/{id}', 'ProductController::edit');
+
+// Update product
+$router->post('/products/update/{id}', 'ProductController::update');
+
+// Delete product
+$router->get('/products/delete/{id}', 'ProductController::delete');

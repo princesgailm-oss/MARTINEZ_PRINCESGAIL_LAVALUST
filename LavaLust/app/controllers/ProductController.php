@@ -7,31 +7,51 @@ class ProductController extends Controller
     {
         parent::__construct();
 
-        // Load helpers, libraries, and models
+        // Load session
         $this->call->library('session');
+
+        // Load URL helper
         $this->call->helper('url');
+
+        // Load Product Model
         $this->call->model('ProductModel');
 
-        // Proteksyon: Kapag hindi naka-login, ibabalik sa login screen
+        // Check if user is logged in
         if (!$this->session->userdata('logged_in')) {
             redirect('login');
             exit;
         }
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT LIST
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $data['products'] = $this->ProductModel->get_all();
 
-        // Loads views/products/index.php
         $this->call->view('products/index', $data);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE PRODUCT FORM
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         $this->call->view('products/create');
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | STORE PRODUCT
+    |--------------------------------------------------------------------------
+    */
     public function store()
     {
         $data = [
@@ -46,6 +66,12 @@ class ProductController extends Controller
         redirect('products');
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT PRODUCT
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $product = $this->ProductModel->get_by_id($id);
@@ -60,6 +86,12 @@ class ProductController extends Controller
         $this->call->view('products/edit', $data);
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE PRODUCT
+    |--------------------------------------------------------------------------
+    */
     public function update($id)
     {
         $data = [
@@ -74,6 +106,12 @@ class ProductController extends Controller
         redirect('products');
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE PRODUCT
+    |--------------------------------------------------------------------------
+    */
     public function delete($id)
     {
         $this->ProductModel->delete($id);

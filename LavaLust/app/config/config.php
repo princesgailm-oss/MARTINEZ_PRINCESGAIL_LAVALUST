@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
 /**
  * ------------------------------------------------------------------
  * LavaLust - an opensource lightweight PHP MVC Framework
@@ -60,7 +61,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 | LavaLust Version
 | -------------------------------------------------------------------
 */
-$config['version']                 = '4.6.0';
+$config['version'] = '4.6.0';
 
 /*
 | -------------------------------------------------------------------
@@ -93,7 +94,8 @@ $config['base_url'] = 'https://martinez-princesgail.onrender.com/';
 | Enable Static Proxies / Facades
 |
 */
-$config['proxy_enabled']           = FALSE;
+$config['proxy_enabled'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -103,7 +105,7 @@ $config['proxy_enabled']           = FALSE;
 | variable to blank.
 |
 */
-$config['index_page']               = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -118,8 +120,8 @@ $config['index_page']               = 'index.php';
 |   3 = All
 |
 */
-$config['log_threshold']            = 3;
-$config['log_dir']                  = 'runtime/logs/';
+$config['log_threshold'] = 3;
+$config['log_dir']       = 'runtime/logs/';
 
 /*
 |--------------------------------------------------------------------------
@@ -141,7 +143,7 @@ $config['log_dir']                  = 'runtime/logs/';
 | Note: This will NOT disable or override the LavaLust-specific
 |   autoloading (app/config/autoload.php)
 */
-$config['composer_autoload']        = FALSE;
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,7 +155,7 @@ $config['composer_autoload']        = FALSE;
 | get a warning message.
 |
 | As a security measure you are STRONGLY encouraged to restrict URLs to
-| as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
+| as few characters as possible. By default only these are allowed: a-z 0-9~%.:_-
 |
 | Leave blank to allow all characters -- but only if you are insane.
 |
@@ -163,7 +165,7 @@ $config['composer_autoload']        = FALSE;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars']      = 'a-z 0-9~%.:_\-';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 
 /*
 |--------------------------------------------------------------------------
@@ -173,17 +175,17 @@ $config['permitted_uri_chars']      = 'a-z 0-9~%.:_\-';
 | This config will be use html_escape function
 |
 */
-$config['charset']                  = 'UTF-8';
+$config['charset'] = 'UTF-8';
 
 /*
 |--------------------------------------------------------------------------
 | Error Views Directory Path
 |--------------------------------------------------------------------------
 |
-| app/views/errors/ directory.  Use a full server path with trailing slash.
+| app/views/errors/ directory. Use a full server path with trailing slash.
 |
 */
-$config['error_view_path']          = '';
+$config['error_view_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -192,12 +194,12 @@ $config['error_view_path']          = '';
 |
 | $config['404_override'] is use if you want to add custom 404 error page.
 |
-|   example: $confg['404_override'] = 'default/404'
+|   example: $config['404_override'] = 'default/404'
 |
 |   if you have 'default folder' and '404.php file' inside error folder in view
 |
 */
-$config['404_override']             = '';
+$config['404_override'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -209,7 +211,7 @@ $config['404_override']             = '';
 | than en-US.
 |
 */
-$config['language']                 = 'en-US';
+$config['language'] = 'en-US';
 
 /*
 |--------------------------------------------------------------------------
@@ -220,7 +222,7 @@ $config['language']                 = 'en-US';
 | For example, if you have a class named MY_Controller, you would set this to 'MY_'.
 |
 */
-$config['subclass_prefix']          = 'MY_';
+$config['subclass_prefix'] = 'MY_';
 
 /*
 |--------------------------------------------------------------------------
@@ -260,17 +262,17 @@ $config['session_hmac_secret']     = getenv('APP_KEY') ?: '';
 | Cookies
 |--------------------------------------------------------------------------
 |
-|Settings for cookies.
+| Settings for cookies.
 |
 |--------------------------------------------------------------------------
 */
-$config['cookie_prefix']           = '';
-$config['cookie_domain']           = '';
-$config['cookie_path']             = '/';
-$config['cookie_secure']           = FALSE;
-$config['cookie_expiration']       = 86400;
-$config['cookie_httponly']         = FALSE;
-$config['cookie_samesite']         = 'Strict';
+$config['cookie_prefix']     = '';
+$config['cookie_domain']     = '';
+$config['cookie_path']       = '/';
+$config['cookie_secure']     = FALSE;
+$config['cookie_expiration'] = 86400;
+$config['cookie_httponly']   = FALSE;
+$config['cookie_samesite']   = 'Strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -285,12 +287,11 @@ $config['cookie_samesite']         = 'Strict';
 |
 |--------------------------------------------------------------------------
 */
-$config['cache_driver']            = 'php';
-$config['cache_dir']               = ROOT_DIR . 'runtime/cache/';
-$config['cache_default_expires']   = 0;
-$config['lock_lock_timeout']       = 5;
-$config['lock_lock_sleep']         = 100000;
-$config['cache_default_expires']   = 0;
+$config['cache_driver']          = 'php';
+$config['cache_dir']             = ROOT_DIR . 'runtime/cache/';
+$config['cache_default_expires'] = 0;
+$config['lock_lock_timeout']     = 5;
+$config['lock_lock_sleep']       = 100000;
 
 /*
 |--------------------------------------------------------------------------
@@ -300,9 +301,8 @@ $config['cache_default_expires']   = 0;
 | If you use the Encryption class, you must set an encryption key.
 | If you use csrf protection, you are highly encouraged to set an encryption key.
 |
-|
 */
-$config['encryption_key']           = getenv('APP_KEY') ?: '';
+$config['encryption_key'] = getenv('APP_KEY') ?: '';
 
 /*
 |--------------------------------------------------------------------------
@@ -312,12 +312,12 @@ $config['encryption_key']           = getenv('APP_KEY') ?: '';
 | If you use the Model class, you can set the default soft delete column name here.
 |
 | Default:
-|   $config['soft_delete']  = FALSE;
-|   $config['soft_delete_column'] = 'deleted_at;
+|   $config['soft_delete']        = FALSE;
+|   $config['soft_delete_column'] = 'deleted_at';
 |
 */
-$config['soft_delete']              = FALSE;
-$config['soft_delete_column']       = 'deleted_at';
+$config['soft_delete']        = FALSE;
+$config['soft_delete_column'] = 'deleted_at';
 
 /*
 |--------------------------------------------------------------------------
@@ -329,9 +329,9 @@ $config['soft_delete_column']       = 'deleted_at';
 |   $config['updated_at_column'] = 'updated_at';
 |
 */
-$config['timestamps']               = FALSE;
-$config['created_at_column']        = 'created_at';
-$config['updated_at_column']        = 'updated_at';
+$config['timestamps']        = FALSE;
+$config['created_at_column'] = 'created_at';
+$config['updated_at_column'] = 'updated_at';
 
 /*
 |--------------------------------------------------------------------------
@@ -342,14 +342,13 @@ $config['updated_at_column']        = 'updated_at';
 | recommended CSRF protection be enabled.
 |
 | 'csrf_exclude_uris' = Array of uris that will not go throught protection
-| 'csrf_token_name' = The token name
+| 'csrf_token_name'  = The token name
 | 'csrf_cookie_name' = The cookie name
-| 'csrf_expire' = The number in seconds the token should expire.
+| 'csrf_expire'      = The number in seconds the token should expire.
 */
-$config['csrf_protection']         = FALSE;
-$config['csrf_exclude_uris']       = array();
-$config['csrf_token_name']         = 'csrf_test_name';
-$config['csrf_cookie_name']        = 'csrf_cookie_name';
-$config['csrf_expire']             = 7200;
-$config['csrf_regenerate']         = FALSE;
-?>
+$config['csrf_protection']   = FALSE;
+$config['csrf_exclude_uris'] = array();
+$config['csrf_token_name']   = 'csrf_test_name';
+$config['csrf_cookie_name']  = 'csrf_cookie_name';
+$config['csrf_expire']       = 7200;
+$config['csrf_regenerate']   = FALSE;
