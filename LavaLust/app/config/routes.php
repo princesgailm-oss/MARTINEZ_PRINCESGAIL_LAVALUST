@@ -37,10 +37,10 @@ $router->get('/products/create', 'ProductController::create');
 $router->post('/products/store', 'ProductController::store');
 
 /* Edit Product */
-$router->get('/products/edit/(:num)', 'ProductController::edit');
+$router->get('/products/edit/(:any)', 'ProductController::edit/$1');
 
 /* Update Product */
-$router->post('/products/update/(:num)', 'ProductController::update');
+$router->post('/products/update/(:any)', 'ProductController::update/$1');
 
 /* Delete Product */
-$router->get('/products/delete/(:num)', 'ProductController::delete');
+$router->get('/products/delete/(:any)', 'ProductController::delete/$1');

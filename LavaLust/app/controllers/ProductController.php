@@ -23,7 +23,7 @@ class ProductController extends Controller
     {
         $data['products'] = $this->ProductModel->get_all();
 
-        // INAYOS DITO: 'products/index' dahil nasa subfolder na views/products/index.php
+        // Loads views/products/index.php
         $this->call->view('products/index', $data);
     }
 
