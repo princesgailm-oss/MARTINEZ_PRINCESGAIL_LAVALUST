@@ -1,125 +1,33 @@
-
-<?php
-defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
-
-class ProductController extends Controller
+public function store()
 {
-    public function __construct()
-    {
-        parent::__construct();
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-        $this->call->model('ProductModel');
-        $this->call->library('session');
-        $this->call->helper('url');
+    echo "<pre>";
+
+    if ($this->io->method() !== 'post') {
+        echo "ERROR: Request is not POST.";
+        exit;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | PRODUCT LIST
-    |--------------------------------------------------------------------------
-    */
+    $data = array(
+        'name'        => $this->io->post('product_name'),
+        'description' => $this->io->post('description'),
+        'price'       => $this->io->post('price'),
+        'quantity'    => $this->io->post('quantity')
+    );
 
-    public function index()
-    {
-        $data['products'] = $this->ProductModel->all();
+    echo "DATA BEING SAVED:\n";
+    print_r($data);
 
-        $this->call->view('products/index', $data);
-    }
+    echo "\n\nTrying to save...\n";
 
+    $result = $this->ProductModel->create($data);
 
-    /*
-    |--------------------------------------------------------------------------
-    | CREATE PRODUCT
-    |--------------------------------------------------------------------------
-    */
+    echo "\nDatabase result:\n";
+    var_dump($result);
 
-    public function create()
-    {
-        $this->call->view('products/create');
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | STORE PRODUCT
-    |--------------------------------------------------------------------------
-    */
-
-    public function store()
-    {
-        if ($this->io->method() !== 'post') {
-            redirect(site_url('products'));
-            return;
-        }
-
-        $data = array(
-            'name'        => $this->io->post('product_name'),
-            'description' => $this->io->post('description'),
-            'price'       => $this->io->post('price'),
-            'quantity'    => $this->io->post('quantity')
-        );
-
-        $this->ProductModel->create($data);
-
-        redirect(site_url('products'));
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | EDIT PRODUCT
-    |--------------------------------------------------------------------------
-    */
-
-    public function edit($id)
-    {
-        $data['product'] = $this->ProductModel->find($id);
-
-        if (!$data['product']) {
-            redirect(site_url('products'));
-            return;
-        }
-
-        $this->call->view('products/edit', $data);
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE PRODUCT
-    |--------------------------------------------------------------------------
-    */
-
-    public function update($id)
-    {
-        if ($this->io->method() !== 'post') {
-            redirect(site_url('products'));
-            return;
-        }
-
-        $data = array(
-            'name'        => $this->io->post('product_name'),
-            'description' => $this->io->post('description'),
-            'price'       => $this->io->post('price'),
-            'quantity'    => $this->io->post('quantity')
-        );
-
-        $this->ProductModel->update($id, $data);
-
-        redirect(site_url('products'));
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | DELETE PRODUCT
-    |--------------------------------------------------------------------------
-    */
-
-    public function delete($id)
-    {
-        $this->ProductModel->delete($id);
-
-        redirect(site_url('products'));
-    }
+    echo "\n\nIf you see this message, database insert finished.";
+    exit;
 }
