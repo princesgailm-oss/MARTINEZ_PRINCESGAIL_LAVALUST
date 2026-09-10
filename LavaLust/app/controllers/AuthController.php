@@ -8,33 +8,18 @@ class AuthController extends Controller
     {
         parent::__construct();
 
-        // Session
         $this->call->library('session');
-
-        // URL helper
         $this->call->helper('url');
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | LOGIN
-    |--------------------------------------------------------------------------
-    */
-
     public function login()
     {
-        // If form was submitted
         if ($this->io->method() === 'post') {
 
             $username = trim($this->io->post('username'));
             $password = $this->io->post('password');
 
-            /*
-            |--------------------------------------------------------------------------
-            | CHECK LOGIN
-            |--------------------------------------------------------------------------
-            */
-
+            // Check username and password
             if ($username === 'admin' && $password === 'password123') {
 
                 // Save login session
@@ -43,23 +28,12 @@ class AuthController extends Controller
                     'username'  => $username
                 ]);
 
-                /*
-                |--------------------------------------------------------------------------
-                | REDIRECT TO PRODUCTS
-                |--------------------------------------------------------------------------
-                */
-
-                header('Location: ' . site_url('products'));
-                exit;
-
+                // Redirect to Products
+                redirect(site_url('products'));
+                return;
             }
 
-            /*
-            |--------------------------------------------------------------------------
-            | INVALID LOGIN
-            |--------------------------------------------------------------------------
-            */
-
+            // Invalid login
             $data = [
                 'error' => 'Invalid username or password.'
             ];
@@ -68,30 +42,16 @@ class AuthController extends Controller
             return;
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | SHOW LOGIN PAGE
-        |--------------------------------------------------------------------------
-        */
-
+        // Show login page
         $this->call->view('login');
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | LOGOUT
-    |--------------------------------------------------------------------------
-    */
-
     public function logout()
     {
-        // Destroy session
         $this->session->sess_destroy();
 
-        // Return to login
-        header('Location: ' . site_url('login'));
-        exit;
+        redirect(site_url('login'));
+        return;
     }
 }
 ?>
