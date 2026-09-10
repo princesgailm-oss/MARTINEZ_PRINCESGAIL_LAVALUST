@@ -13,7 +13,7 @@
             margin: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e0f2fe; /* Light Sky Blue Background */
+            background: #e0f2fe;
             color: #0f172a;
             padding: 40px 20px;
         }
@@ -33,7 +33,7 @@
         .header-bar h1 {
             margin: 0;
             font-size: 32px;
-            color: #0369a1; /* Darker Blue */
+            color: #0369a1;
             font-weight: 700;
         }
 
@@ -55,7 +55,7 @@
         }
 
         .btn-add {
-            background-color: #0284c7; /* Sky Blue Accent */
+            background-color: #0284c7;
             color: #ffffff;
             box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
         }
@@ -66,7 +66,7 @@
         }
 
         .btn-logout {
-            background-color: #ef4444; /* Red Logout */
+            background-color: #ef4444;
             color: #ffffff;
             box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
         }
@@ -91,7 +91,7 @@
         }
 
         thead tr {
-            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); /* Blue to Sky Blue Header */
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
             color: #ffffff;
         }
 
@@ -127,12 +127,13 @@
         }
 
         .btn-edit {
-            background-color: #eab308; /* Yellow Edit */
+            background-color: #eab308;
             color: #ffffff;
             padding: 6px 14px;
             font-size: 13px;
             border-radius: 6px;
             margin-right: 4px;
+            text-decoration: none;
         }
 
         .btn-edit:hover {
@@ -140,11 +141,12 @@
         }
 
         .btn-delete {
-            background-color: #ef4444; /* Red Delete */
+            background-color: #ef4444;
             color: #ffffff;
             padding: 6px 14px;
             font-size: 13px;
             border-radius: 6px;
+            text-decoration: none;
         }
 
         .btn-delete:hover {
@@ -181,12 +183,12 @@
                 <?php if (!empty($products)): ?>
                     <?php foreach ($products as $product): ?>
                         <tr>
-                            <td><?= htmlspecialchars($product['id']); ?></td>
-                            <td><?= htmlspecialchars($product['name']); ?></td>
-                            <td><?= htmlspecialchars($product['description']); ?></td>
-                            <td><?= number_format($product['price'], 2); ?></td>
-                            <td><?= htmlspecialchars($product['quantity']); ?></td>
-                            <td><?= htmlspecialchars($product['created_at']); ?></td>
+                            <td><?= htmlspecialchars($product['id'] ?? ''); ?></td>
+                            <td><?= htmlspecialchars($product['product_name'] ?? $product['name'] ?? ''); ?></td>
+                            <td><?= htmlspecialchars($product['description'] ?? ''); ?></td>
+                            <td><?= number_format($product['price'] ?? 0, 2); ?></td>
+                            <td><?= htmlspecialchars($product['quantity'] ?? ''); ?></td>
+                            <td><?= htmlspecialchars($product['created_at'] ?? ''); ?></td>
                             <td>
                                 <a href="<?= site_url('products/edit/' . $product['id']); ?>" class="btn btn-edit">Edit</a>
                                 <a href="<?= site_url('products/delete/' . $product['id']); ?>" class="btn btn-delete" onclick="return confirm('Sigurado ka bang gusto mong burahin ito?');">Delete</a>
