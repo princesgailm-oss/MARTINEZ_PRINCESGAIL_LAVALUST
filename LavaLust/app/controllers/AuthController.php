@@ -20,7 +20,7 @@ class AuthController extends Controller
             $password = $this->io->post('password');
 
             // Check username and password
-            if ($username === 'admin' && $password === 'password123') {
+            if ($username === 'AdminGail' && $password === 'Gail05') {
 
                 // Save login session
                 $this->session->set_userdata([
@@ -28,7 +28,6 @@ class AuthController extends Controller
                     'username'  => $username
                 ]);
 
-                // CORRECTION: Direct path lang ang ilagay sa redirect(), huwag site_url()
                 redirect('products');
                 return;
             }
@@ -50,9 +49,7 @@ class AuthController extends Controller
     {
         $this->session->sess_destroy();
 
-        // CORRECTION: Direct path lang din dito
         redirect('login');
         return;
     }
 }
-?>
