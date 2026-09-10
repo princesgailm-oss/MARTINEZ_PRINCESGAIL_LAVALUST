@@ -523,8 +523,6 @@
 
     </nav>
 
-
-    <!-- MAIN CONTENT -->
     <main class="container">
 
         <?php if (!empty($notice)): ?>
@@ -535,8 +533,6 @@
 
         <?php endif; ?>
 
-
-        <!-- PROFILE HERO -->
         <section class="hero">
 
             <div class="profile-icon">

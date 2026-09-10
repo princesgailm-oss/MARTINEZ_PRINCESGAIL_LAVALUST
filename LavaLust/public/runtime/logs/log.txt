@@ -40,3 +40,52 @@ Filename: C:\laragon\www\lavalust\LavaLust\app\views\users.php
 Line Number: 49
 ------------------------------------------------------------------
 
+Date: 10/09/2026 0:10:12
+Exception Class: RuntimeException
+Error Message: Controller AuthController does not exist.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Router.php
+Line Number: 373
+------------------------------------------------------------------
+
+Date: 10/09/2026 0:14:19
+Exception Class: RuntimeException
+Error Message: Controller AuthController does not exist.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Router.php
+Line Number: 373
+------------------------------------------------------------------
+
+Date: 10/09/2026 0:16:06
+Exception Class: RuntimeException
+Error Message: Method StudentController->login does not exist.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Router.php
+Line Number: 381
+------------------------------------------------------------------
+
+Date: 10/09/2026 0:20:10
+Exception Class: Exception
+Error Message: Middleware [auth] not registered.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Middleware.php
+Line Number: 96
+------------------------------------------------------------------
+
+Date: 10/09/2026 3:24:27
+Exception Class: Exception
+Error Message: Middleware [auth] not registered.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Middleware.php
+Line Number: 96
+------------------------------------------------------------------
+
+Date: 10/09/2026 3:37:40
+Exception Class: Exception
+Error Message: Middleware [auth] not registered.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Middleware.php
+Line Number: 96
+------------------------------------------------------------------
+
+Date: 10/09/2026 3:43:41
+Exception Class: Exception
+Error Message: Middleware [auth] not registered.
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Middleware.php
+Line Number: 96
+------------------------------------------------------------------
+
