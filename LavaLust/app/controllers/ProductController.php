@@ -54,14 +54,22 @@ class ProductController extends Controller
     */
     public function store()
     {
-        $data = [
-            'product_name' => $this->io->post('product_name'),
-            'description'  => $this->io->post('description'),
-            'price'        => $this->io->post('price'),
-            'quantity'     => $this->io->post('quantity')
-        ];
+        // Tiyaking POST request lamang ang pwedeng pumasok dito
+        if ($this->io->method() === 'post') {
+            $product_name = $this->io->post('product_name') ?? $this->io->post('name');
 
-        $this->ProductModel->insert($data);
+            // Kapag may ipinadalang pangalan
+            if (!empty($product_name)) {
+                $data = [
+                    'product_name' => $product_name,
+                    'description'  => $this->io->post('description'),
+                    'price'        => $this->io->post('price'),
+                    'quantity'     => $this->io->post('quantity')
+                ];
+
+                $this->ProductModel->insert($data);
+            }
+        }
 
         redirect('products');
     }
@@ -72,8 +80,13 @@ class ProductController extends Controller
     | EDIT PRODUCT
     |--------------------------------------------------------------------------
     */
-    public function edit($id)
+    public function edit($id = null)
     {
+        if (!$id) {
+            redirect('products');
+            return;
+        }
+
         $product = $this->ProductModel->get_by_id($id);
 
         if (!$product) {
@@ -92,16 +105,20 @@ class ProductController extends Controller
     | UPDATE PRODUCT
     |--------------------------------------------------------------------------
     */
-    public function update($id)
+    public function update($id = null)
     {
-        $data = [
-            'product_name' => $this->io->post('product_name'),
-            'description'  => $this->io->post('description'),
-            'price'        => $this->io->post('price'),
-            'quantity'     => $this->io->post('quantity')
-        ];
+        if ($this->io->method() === 'post' && $id) {
+            $product_name = $this->io->post('product_name') ?? $this->io->post('name');
 
-        $this->ProductModel->update($id, $data);
+            $data = [
+                'product_name' => $product_name,
+                'description'  => $this->io->post('description'),
+                'price'        => $this->io->post('price'),
+                'quantity'     => $this->io->post('quantity')
+            ];
+
+            $this->ProductModel->update($id, $data);
+        }
 
         redirect('products');
     }
@@ -112,11 +129,12 @@ class ProductController extends Controller
     | DELETE PRODUCT
     |--------------------------------------------------------------------------
     */
-    public function delete($id)
+    public function delete($id = null)
     {
-        $this->ProductModel->delete($id);
+        if ($id) {
+            $this->ProductModel->delete($id);
+        }
 
         redirect('products');
     }
 }
-?>
