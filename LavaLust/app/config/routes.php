@@ -36,11 +36,11 @@ $router->get('/products/create', 'ProductController::create');
 /* Save Product */
 $router->post('/products/store', 'ProductController::store');
 
-/* Edit Product */
-$router->get('/products/edit/(:num)', 'ProductController::edit');
+/* Edit Product - IPASA ANG $1 SA DULO */
+$router->get('/products/edit/(:num)', 'ProductController::edit/$1');
 
-/* Update Product */
-$router->post('/products/update/(:num)', 'ProductController::update');
+/* Update Product - IPASA ANG $1 SA DULO */
+$router->post('/products/update/(:num)', 'ProductController::update/$1');
 
-/* Delete Product */
-$router->get('/products/delete/(:num)', 'ProductController::delete');
+/* Delete Product - IPASA ANG $1 SA DULO */
+$router->get('/products/delete/(:num)', 'ProductController::delete/$1');
