@@ -1,0 +1,5 @@
+[33m86c72b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Fix login redirect
+ LavaLust/app/controllers/AuthController.php    |  56 [32m++[m[31m------------[m
+ LavaLust/app/controllers/ProductController.php | 100 [32m+++++++[m[31m------------------[m
+ LavaLust/app/models/ProductModel.php           |  56 [32m++++++++[m[31m------[m
+ 3 files changed, 66 insertions(+), 146 deletions(-)

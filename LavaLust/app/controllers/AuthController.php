@@ -28,8 +28,8 @@ class AuthController extends Controller
                     'username'  => $username
                 ]);
 
-                // Redirect to Products
-                redirect(site_url('products'));
+                // CORRECTION: Direct path lang ang ilagay sa redirect(), huwag site_url()
+                redirect('products');
                 return;
             }
 
@@ -50,7 +50,8 @@ class AuthController extends Controller
     {
         $this->session->sess_destroy();
 
-        redirect(site_url('login'));
+        // CORRECTION: Direct path lang din dito
+        redirect('login');
         return;
     }
 }

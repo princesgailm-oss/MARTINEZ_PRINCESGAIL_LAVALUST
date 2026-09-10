@@ -1,6 +1,3 @@
-product controller
-
-
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
@@ -10,13 +7,23 @@ class ProductController extends Controller
     {
         parent::__construct();
 
+        // Load helpers, libraries, and models
+        $this->call->library('session');
+        $this->call->helper('url');
         $this->call->model('ProductModel');
+
+        // Proteksyon: Kapag hindi naka-login, ibabalik sa login screen
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login');
+            exit;
+        }
     }
 
     public function index()
     {
         $data['products'] = $this->ProductModel->get_all();
 
+        // INAYOS DITO: 'products/index' dahil nasa subfolder na views/products/index.php
         $this->call->view('products/index', $data);
     }
 
@@ -74,3 +81,4 @@ class ProductController extends Controller
         redirect('products');
     }
 }
+?>
