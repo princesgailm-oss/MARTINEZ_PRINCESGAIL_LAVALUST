@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
  * ------------------------------------------------------
  */
 // Inayos mula sa 'DIR' patungong '_DIR_'
-define('ROOT_DIR',  dirname(_DIR_) . DIRECTORY_SEPARATOR);
+define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
 define('PUBLIC_DIR', $public_folder);
