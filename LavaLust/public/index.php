@@ -1,9 +1,15 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 define('PREVENT_DIRECT_ACCESS', TRUE);
+
+// Global CORS Headers para sa Render API at React Frontend
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 /**
  * ------------------------------------------------------------------
@@ -78,7 +84,7 @@ define('PREVENT_DIRECT_ACCESS', TRUE);
  * Define Application Constants
  * ------------------------------------------------------
  */
-define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define('ROOT_DIR',  dirname(_DIR_) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);
 define('PUBLIC_DIR', $public_folder);
@@ -89,3 +95,4 @@ define('PUBLIC_DIR', $public_folder);
  * ------------------------------------------------------
  */
 require_once SYSTEM_DIR . 'kernel/LavaLust.php';
+?>
