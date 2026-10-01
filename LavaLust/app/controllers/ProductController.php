@@ -53,16 +53,21 @@ class ProductController extends Controller
     public function create()
     {
         $input = json_decode(trim(file_get_contents('php://input')), true);
+        if (empty($input)) {
+            $input = $_POST;
+        }
         
-        $name = $input['name'] ?? $this->io->post('name');
+        $name = $input['name'] ?? $input['product_name'] ?? $this->io->post('name') ?? $this->io->post('product_name');
+        $description = $input['description'] ?? $this->io->post('description');
         $price = $input['price'] ?? $this->io->post('price');
         $quantity = $input['quantity'] ?? $this->io->post('quantity');
 
         if (!empty($name)) {
             $data = [
-                'name' => $name,
-                'price' => $price,
-                'quantity' => $quantity
+                'product_name' => $name,
+                'description'  => $description,
+                'price'        => $price,
+                'quantity'     => $quantity
             ];
 
             $this->ProductModel->insert($data);
@@ -78,27 +83,37 @@ class ProductController extends Controller
         }
     }
 
-    // STORE (Alias para sa create kung sakaling tawagin)
+    // STORE (Alias para sa create)
     public function store()
     {
         $this->create();
     }
 
-    // UPDATE PRODUCT (PUT)
+    // UPDATE PRODUCT
     public function update($id = null)
     {
         if ($id) {
             $input = json_decode(trim(file_get_contents('php://input')), true);
+            if (empty($input)) {
+                $input = $_POST;
+            }
             
-            $name = $input['name'] ?? $this->io->post('name');
+            $name = $input['name'] ?? $input['product_name'] ?? $this->io->post('name') ?? $this->io->post('product_name');
+            $description = $input['description'] ?? $this->io->post('description');
             $price = $input['price'] ?? $this->io->post('price');
             $quantity = $input['quantity'] ?? $this->io->post('quantity');
 
             $data = [
-                'name' => $name,
-                'price' => $price,
-                'quantity' => $quantity
+                'product_name' => $name,
+                'description'  => $description,
+                'price'        => $price,
+                'quantity'     => $quantity
             ];
+
+            // Tanggalin ang mga null values kung sakaling hindi sinama
+            $data = array_filter($data, function($value) {
+                return $value !== null;
+            });
 
             $this->ProductModel->update($id, $data);
 

@@ -32,11 +32,11 @@ $router->get('/products/create', 'ProductController::create');
 // Save new product
 $router->post('/products/store', 'ProductController::store');
 // Show edit form
-$router->get('/products/edit/{id}', 'ProductController::edit');
-// Update product
-$router->post('/products/update/{id}', 'ProductController::update');
-// Delete product
-$router->get('/products/delete/{id}', 'ProductController::delete');
+$router->get('/products/edit/(:num)', 'ProductController::edit/$1');
+// Update product (Updated with correct route parameters)
+$router->post('/products/update/(:num)', 'ProductController::update/$1');
+// Delete product (Updated with correct route parameters)
+$router->get('/products/delete/(:num)', 'ProductController::delete/$1');
 
 // Migration Routes
 $router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
@@ -51,4 +51,3 @@ $router->get('/api/products', 'ApiController::products');
 $router->post('/api/products', 'ApiController::create_product');
 $router->put('/api/products/{id}', 'ApiController::update_product');
 $router->delete('/api/products/{id}', 'ApiController::delete_product');
-
