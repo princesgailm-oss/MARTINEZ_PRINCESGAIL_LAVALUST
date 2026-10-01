@@ -32,11 +32,11 @@ $router->get('/products/create', 'ProductController::create');
 // Save new product
 $router->post('/products/store', 'ProductController::store');
 // Show edit form
-$router->get('/products/edit/(:num)', 'ProductController::edit/$1');
-// Update product (Updated with correct route parameters)
-$router->post('/products/update/(:num)', 'ProductController::update/$1');
-// Delete product (Updated with correct route parameters)
-$router->get('/products/delete/(:num)', 'ProductController::delete/$1');
+$router->get('/products/edit/(:any)', 'ProductController::edit/$1');
+// Update product (Ginawang (:any) para sigurado sa pagbasa ng ID)
+$router->post('/products/update/(:any)', 'ProductController::update/$1');
+// Delete product (Ginawang (:any) para sigurado sa pagbasa ng ID)
+$router->get('/products/delete/(:any)', 'ProductController::delete/$1');
 
 // Migration Routes
 $router->get('create-migration/{migration_class}', 'MigrationController::create_migration');

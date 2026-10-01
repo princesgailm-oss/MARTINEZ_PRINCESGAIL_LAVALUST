@@ -92,6 +92,12 @@ class ProductController extends Controller
     // UPDATE PRODUCT
     public function update($id = null)
     {
+        // Fallback: Kunin ang ID mula sa URL kung hindi naipasa bilang argument
+        if (!$id) {
+            $uri_segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+            $id = end($uri_segments);
+        }
+
         if ($id) {
             $input = json_decode(trim(file_get_contents('php://input')), true);
             if (empty($input)) {
@@ -110,7 +116,7 @@ class ProductController extends Controller
                 'quantity'     => $quantity
             ];
 
-            // Tanggalin ang mga null values kung sakaling hindi sinama
+            // Tanggalin ang mga null values
             $data = array_filter($data, function($value) {
                 return $value !== null;
             });
@@ -131,6 +137,11 @@ class ProductController extends Controller
     // DELETE PRODUCT (DELETE)
     public function delete($id = null)
     {
+        if (!$id) {
+            $uri_segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+            $id = end($uri_segments);
+        }
+
         if ($id) {
             $this->ProductModel->delete($id);
 
