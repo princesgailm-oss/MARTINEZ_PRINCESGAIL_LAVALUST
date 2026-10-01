@@ -84,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
  * Define Application Constants
  * ------------------------------------------------------
  */
-// Inayos mula sa 'DIR' patungong '_DIR_'
 define('ROOT_DIR',  dirname(__DIR__) . DIRECTORY_SEPARATOR);
 define('SYSTEM_DIR', ROOT_DIR . $system_path . DIRECTORY_SEPARATOR);
 define('APP_DIR', ROOT_DIR . $application_folder . DIRECTORY_SEPARATOR);

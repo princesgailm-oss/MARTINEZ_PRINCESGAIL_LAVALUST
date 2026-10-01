@@ -19,7 +19,6 @@ class AuthController extends Controller
         // ----------------------------------------------
 
         $this->call->library('session');
-        $this->call->model('UserModel');
         $this->call->helper('url');
     }
 
@@ -35,16 +34,18 @@ class AuthController extends Controller
         $username = $input['username'] ?? $this->io->post('username');
         $password = $input['password'] ?? $this->io->post('password');
 
-        $user = $this->UserModel->get_user($username);
+        // DIREKTANG QUERY SA DATABASE (Wala nang UserModel na kailangan)
+        $user = $this->db->table('users')
+                         ->where('username', $username)
+                         ->get()
+                         ->row_array();
 
         // Sinusuri kung tama ang password (sumusuporta sa naka-hash o plain text)
         $isPasswordValid = false;
         if ($user) {
-            // Kung naka-hash ang password sa database
             if (!empty($user['password']) && password_get_info($user['password'])['algo'] !== 0) {
                 $isPasswordValid = password_verify($password, $user['password']);
             } else {
-                // Kung plain text ang password sa database
                 $isPasswordValid = ($user['password'] === $password);
             }
         }
@@ -93,4 +94,3 @@ class AuthController extends Controller
         exit();
     }
 }
-
