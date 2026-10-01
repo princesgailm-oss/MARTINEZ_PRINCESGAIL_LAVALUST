@@ -92,34 +92,32 @@ class ProductController extends Controller
     // UPDATE PRODUCT
     public function update($id = null)
     {
-        // Fallback: Kunin ang ID mula sa URL kung hindi naipasa bilang argument
+        // Kung walang $id sa parameter, hanapin sa URI segments o input body
         if (!$id) {
-            $uri_segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+            $uri_segments = array_values(array_filter(explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'))));
             $id = end($uri_segments);
         }
 
-        if ($id) {
-            $input = json_decode(trim(file_get_contents('php://input')), true);
-            if (empty($input)) {
-                $input = $_POST;
-            }
-            
-            $name = $input['name'] ?? $input['product_name'] ?? $this->io->post('name') ?? $this->io->post('product_name');
-            $description = $input['description'] ?? $this->io->post('description');
-            $price = $input['price'] ?? $this->io->post('price');
-            $quantity = $input['quantity'] ?? $this->io->post('quantity');
+        $input = json_decode(trim(file_get_contents('php://input')), true);
+        if (empty($input)) {
+            $input = $_POST;
+        }
 
-            $data = [
-                'product_name' => $name,
-                'description'  => $description,
-                'price'        => $price,
-                'quantity'     => $quantity
-            ];
+        if (!$id && isset($input['id'])) {
+            $id = $input['id'];
+        }
 
-            // Tanggalin ang mga null values
-            $data = array_filter($data, function($value) {
-                return $value !== null;
-            });
+        if ($id && is_numeric($id)) {
+            $name = $input['name'] ?? $input['product_name'] ?? null;
+            $description = $input['description'] ?? null;
+            $price = $input['price'] ?? null;
+            $quantity = $input['quantity'] ?? null;
+
+            $data = [];
+            if ($name !== null) $data['product_name'] = $name;
+            if ($description !== null) $data['description'] = $description;
+            if ($price !== null) $data['price'] = $price;
+            if ($quantity !== null) $data['quantity'] = $quantity;
 
             $this->ProductModel->update($id, $data);
 
@@ -130,19 +128,24 @@ class ProductController extends Controller
 
         header('HTTP/1.1 400 Bad Request');
         header('Content-Type: application/json');
-        echo json_encode(['status' => false, 'message' => 'Product ID is missing']);
+        echo json_encode(['status' => false, 'message' => 'Product ID is missing or invalid']);
         exit();
     }
 
-    // DELETE PRODUCT (DELETE)
+    // DELETE PRODUCT
     public function delete($id = null)
     {
         if (!$id) {
-            $uri_segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+            $uri_segments = array_values(array_filter(explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'))));
             $id = end($uri_segments);
         }
 
-        if ($id) {
+        if (!$id) {
+            $input = json_decode(trim(file_get_contents('php://input')), true);
+            $id = $input['id'] ?? $_POST['id'] ?? null;
+        }
+
+        if ($id && is_numeric($id)) {
             $this->ProductModel->delete($id);
 
             header('Content-Type: application/json');
@@ -152,7 +155,7 @@ class ProductController extends Controller
 
         header('HTTP/1.1 400 Bad Request');
         header('Content-Type: application/json');
-        echo json_encode(['status' => false, 'message' => 'Product ID is missing']);
+        echo json_encode(['status' => false, 'message' => 'Product ID is missing or invalid']);
         exit();
     }
 }
