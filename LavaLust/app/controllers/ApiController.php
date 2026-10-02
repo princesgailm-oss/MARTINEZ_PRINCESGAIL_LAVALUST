@@ -10,61 +10,12 @@ class ApiController extends Controller
         $this->call->model('ProductModel');
     }
 
-    public function create()
-    {
-        $this->api->require_method('POST');
-
-        $input = $this->api->body();
-
-        $this->db->raw(
-            "INSERT INTO users (username, email, password, role, created_at)
-             VALUES (?, ?, ?, ?, NOW())",
-            [
-                $input['username'],
-                $input['email'],
-                password_hash($input['password'], PASSWORD_BCRYPT),
-                $input['role'] ?? 'user',
-            ]
-        );
-
-        $this->api->respond(['message' => 'User created'], 201);
-    }
-
-    public function login()
-    {
-        $this->api->require_method('POST');
-
-        $input = $this->api->body();
-
-        $username = $input['username'] ?? '';
-        $password = $input['password'] ?? '';
-
-        $stmt = $this->db->raw(
-            'SELECT * FROM users WHERE username = ?',
-            [$username]
-        );
-
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($password, $user['password'])) {
-
-            $tokens = $this->api->issue_tokens([
-                'id'   => $user['id'],
-                'role' => $user['role'],
-            ]);
-
-            $this->api->respond($tokens);
-        }
-
-        $this->api->respond_error('Invalid credentials', 401);
-    }
-
     public function products()
     {
         $this->api->require_jwt();
         $this->api->require_method('GET');
 
-        $products = $this->ProductModel->all();
+        $products = $this->ProductModel->get_all();
 
         $this->api->respond($products);
     }
@@ -76,16 +27,26 @@ class ApiController extends Controller
 
         $input = $this->api->body();
 
+        $name = $input['product_name'] ?? $input['name'] ?? '';
+
+        if (trim($name) === '') {
+            $this->api->respond_error('Product name is required', 400);
+            return;
+        }
+
         $data = [
-            'product_name' => $input['product_name'],
-            'description'  => $input['description'],
-            'price'        => $input['price'],
-            'quantity'     => $input['quantity']
+            'product_name' => $name,
+            'description' => $input['description'] ?? '',
+            'price' => $input['price'] ?? 0,
+            'quantity' => $input['quantity'] ?? 0
         ];
 
-        $this->ProductModel->create($data);
+        $this->ProductModel->insert($data);
 
-        $this->api->respond(['message' => 'Product created'], 201);
+        $this->api->respond([
+            'status' => true,
+            'message' => 'Product created successfully'
+        ], 201);
     }
 
     public function update_product($id)
@@ -95,16 +56,26 @@ class ApiController extends Controller
 
         $input = $this->api->body();
 
+        $name = $input['product_name'] ?? $input['name'] ?? '';
+
+        if (trim($name) === '') {
+            $this->api->respond_error('Product name is required', 400);
+            return;
+        }
+
         $data = [
-            'product_name' => $input['product_name'],
-            'description'  => $input['description'],
-            'price'        => $input['price'],
-            'quantity'     => $input['quantity']
+            'product_name' => $name,
+            'description' => $input['description'] ?? '',
+            'price' => $input['price'] ?? 0,
+            'quantity' => $input['quantity'] ?? 0
         ];
 
         $this->ProductModel->update($id, $data);
 
-        $this->api->respond(['message' => 'Product updated']);
+        $this->api->respond([
+            'status' => true,
+            'message' => 'Product updated successfully'
+        ]);
     }
 
     public function delete_product($id)
@@ -114,6 +85,9 @@ class ApiController extends Controller
 
         $this->ProductModel->delete($id);
 
-        $this->api->respond(['message' => 'Product deleted']);
+        $this->api->respond([
+            'status' => true,
+            'message' => 'Product deleted successfully'
+        ]);
     }
 }

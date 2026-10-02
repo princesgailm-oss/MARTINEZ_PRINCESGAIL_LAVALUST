@@ -1,53 +1,76 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-/*
-|--------------------------------------------------------------------------
-| HOME
-|--------------------------------------------------------------------------
-*/
-$router->get('/', 'Welcome::index');
-
+/**
+ * ------------------------------------------------------------------
+ * LavaLust - URI ROUTING
+ * ------------------------------------------------------------------
+ */
 
 /*
-|--------------------------------------------------------------------------
-| AUTHENTICATION
-|--------------------------------------------------------------------------
-*/
-$router->get('/login', 'AuthController::login');
-$router->post('/login', 'AuthController::authenticate');
-$router->get('/logout', 'AuthController::logout');
-
-
-/*
-|--------------------------------------------------------------------------
-| PRODUCT CRUD
-|--------------------------------------------------------------------------
+|------------------------------------------------------------------
+| PRODUCT CRUD ROUTES
+|------------------------------------------------------------------
 */
 
-// Product list
 $router->get('/products', 'ProductController::index');
-// Show create form
-$router->get('/products/create', 'ProductController::create');
-// Save new product
-$router->post('/products/store', 'ProductController::store');
-// Show edit form
-$router->get('/products/edit/(:any)', 'ProductController::edit/$1');
-// Update product (Ginawang (:any) para sigurado sa pagbasa ng ID)
-$router->post('/products/update/(:any)', 'ProductController::update/$1');
-// Delete product (Ginawang (:any) para sigurado sa pagbasa ng ID)
-$router->get('/products/delete/(:any)', 'ProductController::delete/$1');
 
-// Migration Routes
+$router->get('/products/create', 'ProductController::create');
+
+$router->post('/products/store', 'ProductController::store');
+
+$router->get('/products/edit/{id}', 'ProductController::edit')
+       ->where_number('id');
+
+$router->post('/products/update/{id}', 'ProductController::update')
+       ->where_number('id');
+
+$router->get('/products/delete/{id}', 'ProductController::delete')
+       ->where_number('id');
+
+
+/*
+|------------------------------------------------------------------
+| AUTHENTICATION ROUTES
+|------------------------------------------------------------------
+*/
+
+$router->get('/auth/login', 'AuthController::login');
+
+$router->post('/auth/authenticate', 'AuthController::authenticate');
+
+$router->get('/auth/logout', 'AuthController::logout');
+
+
+/*
+|------------------------------------------------------------------
+| MIGRATION ROUTES
+|------------------------------------------------------------------
+*/
+
 $router->get('create-migration/{migration_class}', 'MigrationController::create_migration');
+
 $router->get('migrate', 'MigrationController::migrate');
+
 $router->get('rollback', 'MigrationController::rollback');
+
 $router->get('rollback-all', 'MigrationController::rollback_all');
+
 $router->get('refresh', 'MigrationController::refresh');
+
 $router->get('status', 'MigrationController::status');
 
-// API Routes
+
+/*
+|------------------------------------------------------------------
+| API PRODUCT ROUTES
+|------------------------------------------------------------------
+*/
+
 $router->get('/api/products', 'ApiController::products');
+
 $router->post('/api/products', 'ApiController::create_product');
+
 $router->put('/api/products/{id}', 'ApiController::update_product');
+
 $router->delete('/api/products/{id}', 'ApiController::delete_product');
