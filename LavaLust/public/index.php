@@ -1,6 +1,9 @@
 <?php
 define('PREVENT_DIRECT_ACCESS', TRUE);
 
+// Idagdag ito para ma-handle ang CLI execution sa terminal nang hindi nasisira ang iba
+$_SERVER['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'] ?? 'CLI';
+
 // Global CORS Headers para sa Render API at React Frontend
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");

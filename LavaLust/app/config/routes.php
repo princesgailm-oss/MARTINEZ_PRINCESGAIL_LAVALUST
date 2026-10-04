@@ -41,6 +41,13 @@ $router->post('/auth/authenticate', 'AuthController::authenticate');
 
 $router->get('/auth/logout', 'AuthController::logout');
 
+/*
+| API LOGIN
+|------------------------------------------------------------------
+*/
+
+$router->post('/api/login', 'AuthController::authenticate');
+
 
 /*
 |------------------------------------------------------------------

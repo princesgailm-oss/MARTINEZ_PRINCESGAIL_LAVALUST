@@ -89,3 +89,59 @@ Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Middleware.php
 Line Number: 96
 ------------------------------------------------------------------
 
+Date: 03/10/2026 9:16:52
+Exception Class: Error
+Error Message: Call to a member function row_array() on array
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 41
+------------------------------------------------------------------
+
+Date: 03/10/2026 9:18:54
+Exception Class: E_WARNING
+Error Message: Undefined array key "username"
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Io.php
+Line Number: 123
+------------------------------------------------------------------
+
+Date: 03/10/2026 9:20:18
+Exception Class: E_WARNING
+Error Message: Undefined array key "username"
+Filename: C:\laragon\www\lavalust\LavaLust\scheme\kernel\Io.php
+Line Number: 123
+------------------------------------------------------------------
+
+Date: 03/10/2026 12:54:44
+Exception Class: Error
+Error Message: Call to a member function row_array() on array
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 82
+------------------------------------------------------------------
+
+Date: 03/10/2026 12:58:55
+Exception Class: Error
+Error Message: Call to a member function row_array() on false
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 82
+------------------------------------------------------------------
+
+Date: 03/10/2026 15:10:05
+Exception Class: Error
+Error Message: Call to a member function row_array() on array
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 119
+------------------------------------------------------------------
+
+Date: 03/10/2026 15:16:53
+Exception Class: Error
+Error Message: Call to a member function row_array() on array
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 119
+------------------------------------------------------------------
+
+Date: 03/10/2026 15:20:35
+Exception Class: E_WARNING
+Error Message: Undefined array key 0
+Filename: C:\laragon\www\lavalust\LavaLust\app\controllers\AuthController.php
+Line Number: 118
+------------------------------------------------------------------
+
